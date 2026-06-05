@@ -1,0 +1,53 @@
+services:
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - portal
+
+  portal:
+    build:
+      context: ./apps/portal
+      dockerfile: Dockerfile
+    ports:
+      - "${PORTAL_PORT:-8888}:8888"
+    environment:
+      - POSTGRES_HOST=database
+      - POSTGRES_DB=${POSTGRES_DB:-commitment}
+      - POSTGRES_USER=${POSTGRES_USER:-commitment}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    depends_on:
+      - database
+
+  worker:
+    build:
+      context: ./apps/worker
+      dockerfile: Dockerfile
+    ports:
+      - "${WORKER_PORT:-8000}:8000"
+    environment:
+      - POSTGRES_HOST=database
+      - POSTGRES_DB=${POSTGRES_DB:-commitment}
+      - POSTGRES_USER=${POSTGRES_USER:-commitment}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB:-commitment}
+      - POSTGRES_USER=${POSTGRES_USER:-commitment}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - commitment-db-data:/var/lib/postgresql/data
+
+volumes:
+  commitment-db-data:

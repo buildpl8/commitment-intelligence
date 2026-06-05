@@ -1,0 +1,61 @@
+services:
+  - type: web
+    name: commitment-intelligence-web
+    runtime: docker
+    rootDir: apps/web
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: commitment-intelligence-portal
+    runtime: docker
+    rootDir: apps/portal
+    plan: starter
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: password
+
+  - type: worker
+    name: commitment-intelligence-worker
+    runtime: docker
+    rootDir: apps/worker
+    plan: starter
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: host
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: commitment-intelligence-db
+          property: password
+
+databases:
+  - name: commitment-intelligence-db
+    databaseName: commitment
+    user: commitment
+    plan: starter

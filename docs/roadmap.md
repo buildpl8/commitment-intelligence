@@ -1,0 +1,21 @@
+# Commitment Intelligence Roadmap
+
+## Foundation
+
+- COMMITMENT-FOUNDATION-1
+
+## Future Units
+
+- CONTRACT-INGESTION-1
+- OCR-PIPELINE-1
+- COMMITMENT-EXTRACTION-1
+- COMMITMENT-GRAPH-1
+- SCORING-ENGINE-1
+- PROVIDER-INTELLIGENCE-1
+- USER-EXPERIENCE-1
+- ANALYTICS-1
+- BILLING-1
+
+## Current Constraint
+
+Only repository foundation work is authorized in COMMITMENT-FOUNDATION-1.
