@@ -1,13 +1,16 @@
-# AE-001 — Repository Foundation as First-Class Deliverable
+AE-001 — Repository Foundation
 
-## Decision
-
+Decision:
 Repository foundation is treated as a first-class deliverable.
 
-## Reason
-
+Reason:
 Architectural intent must exist before it can be preserved.
 
-## Impact
-
+Impact:
 Enables BlastRadius-guided development from repository inception.
+
+Date:
+2026-06-05
+
+Status:
+Accepted
